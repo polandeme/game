@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>game</title>
+	<style type="text/css">
+		body {
+			float: left;
+			width: 80%;
+			height: 600px;
+			border: 1px solid red;
+		}
+		.box {
+			float: left;
+			width: 20px;
+			height: 20px;
+			border: 1px solid red;
+			position: absolute;
+			background-color: blue;
+		}
+	</style>
+</head>
+<body>
+<div class="score">0</div>
+<div class="box"></div>
+<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+$(".box").click(function(){
+	$(".box").animate({
+		left: (Math.round((Math.random() * ($('body').width() - 100)) / 50) * 50) + 50,
+        top: (Math.round((Math.random() * ($('body').height() - 50)) / 50) * 50)
+	});
+	var score = parseInt($(".score").text());
+	score++;
+	$(".score").text(score++);
+});
+</script>
+</body>
+</html>
