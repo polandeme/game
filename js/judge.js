@@ -35,4 +35,7 @@ $(document).ready(function(){
                 var num = Math.round(Math.random() * 50);
                 tar.append("<span>" + num + "</span>");
             }
+            function compare() {
+                
+            }
 });
