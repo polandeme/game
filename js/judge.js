@@ -1,6 +1,70 @@
 $(document).ready(function(){
-    var i,j,tar;
-            function cell(i,j) {
+    var cell_new, cell_old, cell_temp;
+    $("td").attr('rel',0);
+    function Cell(i,j,num) {
+        this.i   = i;
+        this.j   = j;
+        this.num = num;
+        this.rel = 0;
+        // $(this).attr('rel', this.rel);
+    }
+
+    function get_cell(i, j) {
+        var tr = $("tr").eq(i);
+        return tr.children("td").eq(j);
+    }
+
+    cell_new = new Cell(0, 0, 0, 0);
+    cell_temp = new Cell(0, 0, 0, 0);
+    function creat_cell_ui(cell_new, cell_old) {
+        var i = Math.round(Math.random() * 1);
+        var j = Math.round(Math.random() * 1);
+        var num = Math.round(Math.random() * 80);
+        cell_new.i = i, cell_new.j = j, cell_new.num = num;
+
+        if(typeof cell_old !== "undefined") {
+            if((cell_new.i === cell_old.i && cell_new.j === cell_old.j) || cell_new.num === cell_old.num) {
+                console.log("ts");
+                creat_cell_ui(cell_new, cell_old);
+            } else {
+                var tar = get_cell(cell_new.i, cell_new.j).addClass('active');
+                tar.append("<span>" + num + "</span>")
+                //add_num(tar,tar);
+            }
+        } else {
+            var tar = get_cell(cell_new.i, cell_new.j).addClass('active');
+            tar.append("<span>" + num + "</span>")
+
+            cell_old = new Cell(i,j,num,0);
+            //cell_old.i = i; //? error
+        }
+        return cell_old;
+    }
+
+    cell_old = creat_cell_ui(cell_new);
+    creat_cell_ui(cell_new, cell_old);
+    console.log(cell_new.i);
+    console.log(cell_old.i);
+    $("table").on('click', '.active', function(){
+        var self = $(this);
+        $("td").attr('rel', 0);
+        self.removeClass("active").text('').attr('rel','1');
+        if(cell_new.rel !== 1) {
+            cell_new = cell_new;
+        } else {
+            cell_temp =  cell_old;
+            cell_new  =  cell_old;
+            cell_old = cell_temp;
+        }
+        console.log(cell_new.i);
+        console.log(cell_old.i);
+        console.log(cell_temp.i);
+        creat_cell_ui(cell_old, cell_new);
+    });
+
+    // console.log(typeof cell_old);
+
+            /*function cell(i,j) {
                 var tr = $("tr").eq(i);
                 return tr.children("td").eq(j);
             }
@@ -37,5 +101,5 @@ $(document).ready(function(){
             }
             function compare() {
                 
-            }
+            }*/
 });
