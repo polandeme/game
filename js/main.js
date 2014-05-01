@@ -1,4 +1,4 @@
-var timer = document.getElementById("time");
+var time = document.getElementById("time");
 time.innerHTML = 59;
 var score = document.getElementById("score");
 score.innerHTML = 0;

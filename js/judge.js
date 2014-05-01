@@ -1,6 +1,7 @@
 $(document).ready(function(){
     var cell_new, cell_old, cell_temp, score;
     score = 0;
+    var range = 10;
     $("td").attr('rel',0);
     function Cell(i,j,num) {
         this.i   = i;
@@ -20,7 +21,7 @@ $(document).ready(function(){
     function creat_cell_ui(cell_new, cell_old) {
         var i = Math.round(Math.random() * 3);
         var j = Math.round(Math.random() * 3);
-        var num = Math.round(Math.random() * 200);
+        var num = Math.round(Math.random() * range + range / 8) ;
         cell_new.i = i, cell_new.j = j, cell_new.num = num;
 
         if(typeof cell_old !== "undefined") {
@@ -56,10 +57,16 @@ $(document).ready(function(){
             cell_old = cell_temp;
         }
         if (cell_new.num < cell_old.num) {
+            range += 2;
             score++;
             $("#score").text(score);
             self.removeClass("active").text('').attr('rel','1');
-            creat_cell_ui(cell_new, cell_old);
+           creat_cell_ui(cell_new, cell_old);
+        } else {
+            if( time.innerHTML > 20 )
+            {
+                time.innerHTML -= 5;
+            }
         }
     });
 
