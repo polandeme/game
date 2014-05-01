@@ -1,5 +1,6 @@
 $(document).ready(function(){
-    var cell_new, cell_old, cell_temp;
+    var cell_new, cell_old, cell_temp, score;
+    score = 0;
     $("td").attr('rel',0);
     function Cell(i,j,num) {
         this.i   = i;
@@ -17,19 +18,18 @@ $(document).ready(function(){
     cell_new = new Cell(0, 0, 0, 0);
     cell_temp = new Cell(0, 0, 0, 0);
     function creat_cell_ui(cell_new, cell_old) {
-        var i = Math.round(Math.random() * 1);
-        var j = Math.round(Math.random() * 1);
-        var num = Math.round(Math.random() * 80);
+        var i = Math.round(Math.random() * 3);
+        var j = Math.round(Math.random() * 3);
+        var num = Math.round(Math.random() * 200);
         cell_new.i = i, cell_new.j = j, cell_new.num = num;
 
         if(typeof cell_old !== "undefined") {
-            if((cell_new.i === cell_old.i && cell_new.j === cell_old.j) || cell_new.num === cell_old.num) {
+            if((cell_new.i === cell_old.i && cell_new.j === cell_old.j) || cell_new.num === cell_old.num ) {
                 console.log("ts");
                 creat_cell_ui(cell_new, cell_old);
             } else {
                 var tar = get_cell(cell_new.i, cell_new.j).addClass('active');
-                tar.append("<span>" + num + "</span>")
-                //add_num(tar,tar);
+                tar.append("<span>" + num + "</span>");
             }
         } else {
             var tar = get_cell(cell_new.i, cell_new.j).addClass('active');
@@ -43,23 +43,24 @@ $(document).ready(function(){
 
     cell_old = creat_cell_ui(cell_new);
     creat_cell_ui(cell_new, cell_old);
-    console.log(cell_new.i);
-    console.log(cell_old.i);
     $("table").on('click', '.active', function(){
         var self = $(this);
         $("td").attr('rel', 0);
-        self.removeClass("active").text('').attr('rel','1');
-        if(cell_new.rel !== 1) {
+        var ind = self.index();
+        var pa = self.parent().parent().find("tr").index($(this).parent()[0]);
+        if(cell_new.i === pa && cell_new.j === ind) {
             cell_new = cell_new;
         } else {
-            cell_temp =  cell_old;
-            cell_new  =  cell_old;
+            cell_temp =  cell_new;
+            cell_new = cell_old;
             cell_old = cell_temp;
         }
-        console.log(cell_new.i);
-        console.log(cell_old.i);
-        console.log(cell_temp.i);
-        creat_cell_ui(cell_old, cell_new);
+        if (cell_new.num < cell_old.num) {
+            score++;
+            $("#score").text(score);
+            self.removeClass("active").text('').attr('rel','1');
+            creat_cell_ui(cell_new, cell_old);
+        }
     });
 
     // console.log(typeof cell_old);
