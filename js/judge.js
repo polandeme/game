@@ -40,7 +40,10 @@ $(document).ready(function(){
     $(".container").on('click','.game_restart', function(){
         game_restart();
     });
-
+    $(".replay").click(function(){
+        game_restart();
+        $(".mask,.mask-content").css("display","none");
+    });
     cell_new = new Cell(0, 0, 0, 0);
     cell_temp = new Cell(0, 0, 0, 0);
     function creat_cell_ui(cell_new, cell_old) {
@@ -91,21 +94,27 @@ $(document).ready(function(){
                 self.removeClass("active").text('').attr('rel','1');
                creat_cell_ui(cell_new, cell_old);
             } else {
-                if( time.innerHTML > 15 )
-                {
                     $(this).animate({
                         backgroundColor: "red"
                     }, 150, function() {
-                        $(this).mouseout(function(){
-                            $(this).css("background", ""); 
-                        }) 
+                        var self = $(this);
+                        // self.mouseout(function(){
+                        //     console.log("dd00");
+                        //     self.css("background", "");
+                           
+                        //     event.stopPropagation(); 
+                        // }); // have a bug 
+                        setTimeout(function(){
+                                self.css("background", "");
+                        },50);
                     });
-
-                    clearInterval(inter);
-                    time.innerHTML -= 5;
-                    time_start();
-                }
-        event.stopPropagation();
+                    if(time.innerHTML > 15 )
+                    { 
+                        clearInterval(inter);
+                        time.innerHTML -= 5;
+                        time_start();
+                    }
+                event.stopPropagation();
 
             }
         });
@@ -139,5 +148,7 @@ $(document).ready(function(){
         });
         event.stopPropagation();
     }
+
+
 });
 // }); // /end
