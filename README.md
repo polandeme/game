@@ -3,3 +3,6 @@
 - 防止两张图片合并
 - 点击大数得分
 - 模块化
+- num range
+- rang init restart
+- 增加本地存储 最高分

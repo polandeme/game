@@ -1,39 +1,32 @@
 <!doctype html>
 <html>
     <head>
-        <title> game </title>
-        <style>
-            table {
-                position:   absolute;
-                top: 50%;
-                height: 258px;
-                left: 50%;
-                margin-left: -179px;
-                margin-top: -179px;
-            }
-            td {
-                width: 70px;
-                height: 85px;
-                text-align: center;
-                border: solid 1px blue;
-            }
-            .active {
-                background: red;
-            }
-        </style>
+        <meta charset="utf-8">
+        <title> game </title>   
+        <link rel="stylesheet" type="text/css" href="css/main.css">
     </head>
     <body>
-        <div class="box">
-            <div id="time"> </div>
-            <div id="score"> </div>
+        <div class="container">
+                <div class="time-box">
+                    <span>时间</span>
+                    <div id="time"></div>
+                </div>
+                <div class="score-box">
+                    <span>分数</span>
+                    <div id="score" > </div>
+                </div>
+                <div class="game_start">
+                    开始游戏
+                </div>
+            <table border="1" cellspacing="0">
+                <tr> <td> </td> <td> </td> <td> </td> <td> </td> </tr>
+                <tr> <td> </td> <td> </td> <td> </td> <td> </td> </tr>
+                <tr> <td> </td> <td> </td> <td> </td> <td> </td> </tr>            
+                <tr> <td> </td> <td> </td> <td> </td> <td> </td> </tr>
+            </table>
         </div>
-        <table border="1" cellspacing="0">
-            <tr> <td> </td> <td> </td> <td> </td> <td> </td> </tr>
-            <tr> <td> </td> <td> </td> <td> </td> <td> </td> </tr>
-            <tr> <td> </td> <td> </td> <td> </td> <td> </td> </tr>            
-            <tr> <td> </td> <td> </td> <td> </td> <td> </td> </tr>
-        </table>
         <script src="js/jquery-1.11.0.min.js"></script>
+        <script src="js/jquery.color-2.1.2.min.js"></script>
         <script src="js/main.js"></script>
         <script src="js/judge.js"></script>
         </body>
