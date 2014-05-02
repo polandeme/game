@@ -22,7 +22,7 @@ td span {
     background: rgb(166, 202, 133);
     box-shadow: 2px 2px 3px gray;
 }
-.time-box, .score-box {
+.time-box, .score-box,.max {
     float: left;
     width: 50px;
     height: 40px;

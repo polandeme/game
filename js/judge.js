@@ -3,12 +3,12 @@ $(document).ready(function(){
     score = 0;
     var range = 10;
     $("td").attr('rel',0);
+
     function Cell(i,j,num) {
         this.i   = i;
         this.j   = j;
         this.num = num;
         this.rel = 0;
-        // $(this).attr('rel', this.rel);
     }
 
     function get_cell(i, j) {
@@ -20,32 +20,51 @@ $(document).ready(function(){
         time_start();
         bind_click();
     }
+
     function game_restart() {
         $(".active").text('');
         $(".active").removeClass();
+        score = 0;
         game_init();
         game_start();
     }
     function game_init() {
         $("#time").html(60);
         $("#score").html(0);
+        // 判断 本地存储 模块化 todo
+        if(window.localStorage && window.localStorage.getItem) {
+
+            var ls = localStorage;
+            if(ls.getItem('max_score')) {
+                var max_score_old = parseInt(ls.getItem('max_score'));
+            } else {
+                max_score_old = 0;
+            }
+        }
+        console.log(max_score_old);
+        $("#max-score").html(max_score_old);
         cell_old = creat_cell_ui(cell_new);
         creat_cell_ui(cell_new, cell_old);
     }
+
     $(".container").on('click','.game_start', function(){
         game_start();
         $(this).text("重新开始").css("background", "#D69BB2");
         $(this).removeClass().addClass("game_restart");
     });
+
     $(".container").on('click','.game_restart', function(){
         game_restart();
     });
+
     $(".replay").click(function(){
         game_restart();
         $(".mask,.mask-content").css("display","none");
     });
+
     cell_new = new Cell(0, 0, 0, 0);
     cell_temp = new Cell(0, 0, 0, 0);
+
     function creat_cell_ui(cell_new, cell_old) {
         var i = Math.round(Math.random() * 3);
         var j = Math.round(Math.random() * 3);
@@ -54,7 +73,6 @@ $(document).ready(function(){
 
         if(typeof cell_old !== "undefined") {
             if((cell_new.i === cell_old.i && cell_new.j === cell_old.j) || cell_new.num === cell_old.num ) {
-                console.log("ts");
                 creat_cell_ui(cell_new, cell_old);
             } else {
                 var tar = get_cell(cell_new.i, cell_new.j).addClass('active');
@@ -62,8 +80,7 @@ $(document).ready(function(){
             }
         } else {
             var tar = get_cell(cell_new.i, cell_new.j).addClass('active');
-            tar.append("<span>" + num + "</span>")
-
+            tar.append("<span>" + num + "</span>");
             cell_old = new Cell(i,j,num,0);
             //cell_old.i = i; //? error
         }
@@ -115,7 +132,6 @@ $(document).ready(function(){
                         time_start();
                     }
                 event.stopPropagation();
-
             }
         });
     }
@@ -148,7 +164,4 @@ $(document).ready(function(){
         });
         event.stopPropagation();
     }
-
-
 });
-// }); // /end
