@@ -6,3 +6,5 @@
 - num range
 - rang init restart
 - 增加本地存储 最高分
+-**bug**   
+连续点击重新开始
