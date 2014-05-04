@@ -68,7 +68,7 @@ $(document).ready(function(){
     function creat_cell_ui(cell_new, cell_old) {
         var i = Math.round(Math.random() * 3);
         var j = Math.round(Math.random() * 3);
-        var num = Math.round(Math.random() * range + range / 2) ;
+        var num = Math.round(Math.random() * range + range / 3) ;
         cell_new.i = i, cell_new.j = j, cell_new.num = num;
 
         if(typeof cell_old !== "undefined") {
