@@ -29,6 +29,7 @@ function save_max_score() {
         console.log("dd");
     }
 }
+
 function game_over() {
     var score = $("#score").text();
     save_max_score();
@@ -36,5 +37,8 @@ function game_over() {
     $(".mask").click(function(){
         $(".mask,.mask-content").css("display","none");
     });
-    $(".mask-content").text("Game over" + '\n' + "your score is   " + score);
+    $(".mask-content .res-score").text(score);
 }
+// function show_res() {
+    
+// }
