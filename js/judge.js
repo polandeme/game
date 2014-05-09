@@ -91,7 +91,7 @@ $(document).ready(function(){
 
     function bind_click() {
 
-        $("table").on('click', '.active', function(){
+        $("body").on('click', '.active', function(){
             var self = $(this);
             $("td").attr('rel', 0);
             var ind = self.index();

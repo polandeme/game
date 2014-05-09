@@ -1,5 +1,3 @@
-
-// var score = $("#score").text();
 function time_down() {
     if(time.innerHTML > 0) {
         time.innerHTML --;
